@@ -25,5 +25,6 @@ namespace HRSG_Datalayer
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<User> Users { get; set; }
     }
 }
