@@ -464,7 +464,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HRSG_DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="HRSG_DatabaseEntities" annotation:LazyLoadingEnabled="true" >
+        <EntityContainer Name="HRSG_DatabaseEntities" annotation:LazyLoadingEnabled="false" >
           <EntitySet Name="Users" EntityType="HRSG_DatabaseModel.User" />
           <EntitySet Name="Clients" EntityType="HRSG_DatabaseModel.Client" />
           <EntitySet Name="ClientSections" EntityType="HRSG_DatabaseModel.ClientSection" />

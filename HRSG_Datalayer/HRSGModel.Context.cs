@@ -18,6 +18,7 @@ namespace HRSG_Datalayer
         public HRSG_DatabaseEntities()
             : base("name=HRSG_DatabaseEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
