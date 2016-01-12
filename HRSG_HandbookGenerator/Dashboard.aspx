@@ -18,6 +18,20 @@
             function ConfirmDeleteSubsection(id) {
                 return confirm('Are you sure you want to delete Subsection #' + id + " ?");
             }
+
+            function OpenAddSubsection() {
+                var oWnd = radopen("Popups/AddSubSection.aspx?", "radwinAddSubsection");
+            }
+
+            function OnAddSubsectionClose(oWnd, args) {
+                var arg = args.get_argument();
+
+                //if a arg was found, then a a save occured
+                if (arg) {
+                    var masterTable = window.$find('<%= rgSubsections.ClientID %>').get_masterTableView();
+                    masterTable.rebind();
+                }
+            }
         </script>
     </telerik:RadScriptBlock>
 </asp:Content>
@@ -209,7 +223,7 @@
                         
                                 <span style="padding-right: 10px;float:right; vertical-align:top">
                                     <span style="padding-right: 10px">&nbsp;</span>
-                                    <asp:button CssClass="button-wide button-orange" id="btnAddSubSection" Text="Add Subsection" runat="server" />
+                                    <asp:button CssClass="button-wide button-orange" id="btnAddSubSection" Text="Add Subsection" runat="server" OnClientClick="OpenAddSubsection();return false;" />
                                 </span><br />
 
                                 <div style="padding-top: 20px;padding-right: 10px;padding-bottom: 20px;vertical-align:top">
@@ -224,15 +238,15 @@
                                     OnNeedDataSource="rgSubsections_OnNeedDataSource" OnItemCommand="rgSubsections_OnItemCommand">
                                     <MasterTableView NoMasterRecordsText="No records exist.">
                                         <Columns>
-                                            <telerik:GridBoundColumn HeaderText="ID" UniqueName="ID" DataField="ID" />
+                                            <telerik:GridBoundColumn HeaderText="ID" UniqueName="ID" DataField="ID" HeaderStyle-Width="5%" ItemStyle-Width="5%" />
 
-                                            <telerik:GridBoundColumn HeaderText="Modified" UniqueName="Modified" DataField="Modified" DataFormatString="{0:MM/dd/yy}"/>
+                                            <telerik:GridBoundColumn HeaderText="Modified" UniqueName="Modified" DataField="Modified" DataFormatString="{0:MM/dd/yy}" HeaderStyle-Width="10%" ItemStyle-Width="10%" />
                                             
-                                            <telerik:GridBoundColumn HeaderText="Description" UniqueName="Description" DataField="Description" />
+                                            <telerik:GridBoundColumn HeaderText="Description" UniqueName="Description" DataField="Description" HeaderStyle-Width="15%" ItemStyle-Width="15%" />
 
-                                            <telerik:GridBoundColumn HeaderText="Value" UniqueName="Value" DataField="Value" />
+                                            <telerik:GridBoundColumn HeaderText="Value" UniqueName="Value" DataField="Value" HeaderStyle-Width="60%" ItemStyle-Width="5%" />
                                         
-                                            <telerik:GridTemplateColumn HeaderText="Actions" HeaderStyle-Width="10%">
+                                            <telerik:GridTemplateColumn HeaderText="Actions" HeaderStyle-Width="10%" ItemStyle-Width="10%" >
                                                 <ItemTemplate>
                                                     <table>
                                                         <tr>
@@ -255,6 +269,13 @@
                     </div>
                 </telerik:RadPageView>
             </telerik:RadMultiPage>
+                    
+            <telerik:RadWindowManager runat="server" ShowContentDuringLoad="False" VisibleStatusbar="False" Modal="True" ReloadOnShow="True" >
+                <Windows>
+                    <telerik:RadWindow runat="server" ID="radwinAddSubsection" Width="960" Height="640" Behaviors="Close"
+                        OnClientClose="OnAddSubsectionClose" NavigateUrl="~/Popups/AddSubsection.aspx" />
+                </Windows>
+            </telerik:RadWindowManager>
 
             </div>
             </section>

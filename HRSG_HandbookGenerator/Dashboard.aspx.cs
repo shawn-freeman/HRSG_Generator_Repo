@@ -26,8 +26,7 @@ namespace HRSG_HandbookGenerator {
             using (var hrsgEntities = new HRSG_DatabaseEntities())
             {
                 var results = hrsgEntities.Clients.Where(c => c.Active).ToList();
-
-                var clientIndustry = 
+                
                 //convert the results into a custom listing object
                 var clientListing = results.Select(a => new ClientListingItem()
                 {
