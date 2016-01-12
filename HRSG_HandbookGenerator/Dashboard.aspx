@@ -1,12 +1,44 @@
 ﻿<%@ Page Title="Dashboard" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="HRSG_HandbookGenerator.Dashboard" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+<asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server" >
+    <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">
+        <script type="text/javascript" >
+            function ConfirmDeleteClient(id){
+                return confirm('Are you sure you want to delete Client #' + id + " ?");
+            }
+
+            function ConfirmDeleteIndustry(id){
+                return confirm('Are you sure you want to delete Industry #' + id + " ?");
+            }
+
+            function ConfirmDeleteSection(id) {
+                return confirm('Are you sure you want to delete Section #' + id + " ?");
+            }
+
+            function ConfirmDeleteSubsection(id) {
+                return confirm('Are you sure you want to delete Subsection #' + id + " ?");
+            }
+        </script>
+    </telerik:RadScriptBlock>
+</asp:Content>
+
+<asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %></h2>
 
     <div class="row">
         <div class="col-md-8">
             <section id="loginForm">
                 <div class="form-horizontal">
-                    <telerik:RadMultiPage runat="server" BorderColor="#454545" BorderStyle="Solid" BorderWidth="1px" SelectedIndex="0" Width="975px" >
+                    <telerik:RadTabStrip ID="rtsDashboard" runat="server" MultiPageID="rmpMain" EnableEmbeddedSkins="False" Style="position: relative; z-index: 1000" SelectedIndex="0">
+                        <Tabs>
+                            <telerik:RadTab Text="Clients" Selected="true" />
+                            <telerik:RadTab Text="Industries" />
+                            <telerik:RadTab Text="Sections" />
+                            <telerik:RadTab Text="Subsections" />
+                        </Tabs>
+                    </telerik:RadTabStrip>
+
+                    <telerik:RadMultiPage ID="rmpMain" runat="server" BorderColor="#454545" BorderStyle="Solid" BorderWidth="1px" SelectedIndex="0" Width="975px" >
                         <telerik:RadPageView runat="server" ID="rpvClients">
                         <div style="background-color: #edeef2; width: 100%;min-height:550px;">
                         <div style="padding-top: 20px;padding-left: 20px; padding-right: 20px;">
@@ -26,27 +58,189 @@
                             </div>
 
                             <div style="padding-right: 10px;padding-bottom: 10px;">
-                                <telerik:RadGrid ID="rgClients" runat="server" GridLines="None" AutoGenerateColumns="false" AllowPaging="true" PageSize="25" AllowSorting="False">
+                                <telerik:RadGrid ID="rgClients" runat="server" GridLines="None" AutoGenerateColumns="false" AllowPaging="true" PageSize="25" AllowSorting="False"
+                                    OnNeedDataSource="rgClients_OnNeedDataSource" OnItemCommand="rgClients_OnItemCommand">
                                     <MasterTableView NoMasterRecordsText="No records exist.">
                                         <Columns>
                                             <telerik:GridBoundColumn HeaderText="ID" UniqueName="ID" DataField="ID" />
-                                            <telerik:GridBoundColumn HeaderText="Name" UniqueName="Name" DataField="Name" />
 
                                             <telerik:GridBoundColumn HeaderText="Modified" UniqueName="Modified" DataField="Modified" DataFormatString="{0:MM/dd/yy}"/>
+                                            
+                                            <telerik:GridBoundColumn HeaderText="Name" UniqueName="Name" DataField="Name" />
 
-                                            <telerik:GridBoundColumn HeaderText="Industry" UniqueName="Industry" DataField="Industry" />
+                                            <telerik:GridBoundColumn HeaderText="Industry Name" UniqueName="IndustryName" DataField="IndustryName" />
 
-                                            <telerik:GridBoundColumn HeaderText="Company Size" UniqueName="EmployeeSize" DataField="EmployeeSize"/>
+                                            <telerik:GridBoundColumn HeaderText="Company Size" UniqueName="EmployeeRange" DataField="EmployeeRange"/>
                                         
                                             <telerik:GridTemplateColumn HeaderText="Actions" HeaderStyle-Width="10%">
                                                 <ItemTemplate>
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                <asp:LinkButton ID="Edit" runat="server" CommandName="Edit" ToolTip="Edit" PostBackUrl="~/Default.aspx" Text="Edit"></asp:LinkButton>
+                                                                <asp:LinkButton ID="Edit" runat="server" CommandName="Edit" ToolTip="Edit" CommandArgument='<%# Eval("ID") %>' PostBackUrl="~/Default.aspx" Text="Edit"></asp:LinkButton>
                                                             </td>
                                                             <td>
-                                                                <asp:LinkButton ID="DeleteLink" runat="server" CommandName="Delete" ToolTip="Delete" CommandArgument='<%# Eval("ID") %>' Text="Delete" ></asp:LinkButton>
+                                                                <asp:LinkButton ID="DeleteLink" runat="server" CommandName="Delete" ToolTip="Delete" CommandArgument='<%# Eval("ID") %>' OnClientClick='<%# "return ConfirmDeleteClient(" + Eval("ID") + ")" %>' Text="Delete" ></asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                    </table>                       
+                                                </ItemTemplate>
+                                                <ItemStyle Width="50px" />
+                                            </telerik:GridTemplateColumn>                                      
+                                        </Columns>
+                                    </MasterTableView>
+                                </telerik:RadGrid>
+                            </div>
+                        </div>
+                    </div>
+                </telerik:RadPageView>
+                        
+                        <telerik:RadPageView runat="server" ID="rpvIndustries">
+                        <div style="background-color: #edeef2; width: 100%;min-height:550px;">
+                        <div style="padding-top: 20px;padding-left: 20px; padding-right: 20px;">
+                            <div style="padding-bottom: 15px">
+                                <span class="sectionHeader"><h3>Industries</h3></span>
+                        
+                                <span style="padding-right: 10px;float:right; vertical-align:top">
+                                    <span style="padding-right: 10px">&nbsp;</span>
+                                    <asp:button CssClass="button-wide button-orange" id="btnAddIndustry" Text="Add Industry" runat="server" />
+                                </span><br />
+
+                                <div style="padding-top: 20px;padding-right: 10px;padding-bottom: 20px;vertical-align:top">
+                                    <div style="float:left">
+                                        You can add and remove Industries below
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="padding-right: 10px;padding-bottom: 10px;">
+                                <telerik:RadGrid ID="rgIndustries" runat="server" GridLines="None" AutoGenerateColumns="false" AllowPaging="true" PageSize="25" AllowSorting="False"
+                                    OnNeedDataSource="rgIndustries_OnNeedDataSource" OnItemCommand="rgIndustries_OnItemCommand">
+                                    <MasterTableView NoMasterRecordsText="No records exist.">
+                                        <Columns>
+                                            <telerik:GridBoundColumn HeaderText="ID" UniqueName="ID" DataField="ID" />
+
+                                            <telerik:GridBoundColumn HeaderText="Modified" UniqueName="Modified" DataField="Modified" DataFormatString="{0:MM/dd/yy}"/>
+
+                                            <telerik:GridBoundColumn HeaderText="Name" UniqueName="Name" DataField="Name" />
+                                        
+                                            <telerik:GridTemplateColumn HeaderText="Actions" HeaderStyle-Width="10%">
+                                                <ItemTemplate>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:LinkButton ID="Edit" runat="server" CommandName="Edit" ToolTip="Edit" CommandArgument='<%# Eval("ID") %>' PostBackUrl="~/Default.aspx" Text="Edit"></asp:LinkButton>
+                                                            </td>
+                                                            <td>
+                                                                <asp:LinkButton ID="DeleteLink" runat="server" CommandName="Delete" ToolTip="Delete" CommandArgument='<%# Eval("ID") %>' OnClientClick='<%# "return ConfirmDeleteIndustry(" + Eval("ID") + ")" %>' Text="Delete" ></asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                    </table>                       
+                                                </ItemTemplate>
+                                                <ItemStyle Width="50px" />
+                                            </telerik:GridTemplateColumn>                                      
+                                        </Columns>
+                                    </MasterTableView>
+                                </telerik:RadGrid>
+                            </div>
+                        </div>
+                    </div>
+                </telerik:RadPageView>
+                        
+                        <telerik:RadPageView runat="server" ID="rpvSections">
+                        <div style="background-color: #edeef2; width: 100%;min-height:550px;">
+                        <div style="padding-top: 20px;padding-left: 20px; padding-right: 20px;">
+                            <div style="padding-bottom: 15px">
+                                <span class="sectionHeader"><h3>Sections</h3></span>
+                        
+                                <span style="padding-right: 10px;float:right; vertical-align:top">
+                                    <span style="padding-right: 10px">&nbsp;</span>
+                                    <asp:button CssClass="button-wide button-orange" id="btnAddSection" Text="Add Section" runat="server" />
+                                </span><br />
+
+                                <div style="padding-top: 20px;padding-right: 10px;padding-bottom: 20px;vertical-align:top">
+                                    <div style="float:left">
+                                        You can add and remove Sections below
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="padding-right: 10px;padding-bottom: 10px;">
+                                <telerik:RadGrid ID="rgSections" runat="server" GridLines="None" AutoGenerateColumns="false" AllowPaging="true" PageSize="25" AllowSorting="False"
+                                    OnNeedDataSource="rgSections_OnNeedDataSource" OnItemCommand="rgSections_OnItemCommand">
+                                    <MasterTableView NoMasterRecordsText="No records exist.">
+                                        <Columns>
+                                            <telerik:GridBoundColumn HeaderText="ID" UniqueName="ID" DataField="ID" />
+
+                                            <telerik:GridBoundColumn HeaderText="Modified" UniqueName="Modified" DataField="Modified" DataFormatString="{0:MM/dd/yy}"/>
+                                            
+                                            <telerik:GridBoundColumn HeaderText="Description" UniqueName="Description" DataField="Description" />
+
+                                            <telerik:GridBoundColumn HeaderText="Value" UniqueName="Value" DataField="Value" />
+                                        
+                                            <telerik:GridTemplateColumn HeaderText="Actions" HeaderStyle-Width="10%">
+                                                <ItemTemplate>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:LinkButton ID="Edit" runat="server" CommandName="Edit" ToolTip="Edit" CommandArgument='<%# Eval("ID") %>' PostBackUrl="~/Default.aspx" Text="Edit"></asp:LinkButton>
+                                                            </td>
+                                                            <td>
+                                                                <asp:LinkButton ID="DeleteLink" runat="server" CommandName="Delete" ToolTip="Delete" CommandArgument='<%# Eval("ID") %>' OnClientClick='<%# "return ConfirmDeleteSection(" + Eval("ID") + ")" %>' Text="Delete" ></asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                    </table>                       
+                                                </ItemTemplate>
+                                                <ItemStyle Width="50px" />
+                                            </telerik:GridTemplateColumn>                                      
+                                        </Columns>
+                                    </MasterTableView>
+                                </telerik:RadGrid>
+                            </div>
+                        </div>
+                    </div>
+                </telerik:RadPageView>
+                        
+                        <telerik:RadPageView runat="server" ID="rpvSubsections">
+                        <div style="background-color: #edeef2; width: 100%;min-height:550px;">
+                        <div style="padding-top: 20px;padding-left: 20px; padding-right: 20px;">
+                            <div style="padding-bottom: 15px">
+                                <span class="sectionHeader"><h3>Subsections</h3></span>
+                        
+                                <span style="padding-right: 10px;float:right; vertical-align:top">
+                                    <span style="padding-right: 10px">&nbsp;</span>
+                                    <asp:button CssClass="button-wide button-orange" id="btnAddSubSection" Text="Add Subsection" runat="server" />
+                                </span><br />
+
+                                <div style="padding-top: 20px;padding-right: 10px;padding-bottom: 20px;vertical-align:top">
+                                    <div style="float:left">
+                                        You can add and remove Subsections below
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="padding-right: 10px;padding-bottom: 10px;">
+                                <telerik:RadGrid ID="rgSubsections" runat="server" GridLines="None" AutoGenerateColumns="false" AllowPaging="true" PageSize="25" AllowSorting="False"
+                                    OnNeedDataSource="rgSubsections_OnNeedDataSource" OnItemCommand="rgSubsections_OnItemCommand">
+                                    <MasterTableView NoMasterRecordsText="No records exist.">
+                                        <Columns>
+                                            <telerik:GridBoundColumn HeaderText="ID" UniqueName="ID" DataField="ID" />
+
+                                            <telerik:GridBoundColumn HeaderText="Modified" UniqueName="Modified" DataField="Modified" DataFormatString="{0:MM/dd/yy}"/>
+                                            
+                                            <telerik:GridBoundColumn HeaderText="Description" UniqueName="Description" DataField="Description" />
+
+                                            <telerik:GridBoundColumn HeaderText="Value" UniqueName="Value" DataField="Value" />
+                                        
+                                            <telerik:GridTemplateColumn HeaderText="Actions" HeaderStyle-Width="10%">
+                                                <ItemTemplate>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:LinkButton ID="Edit" runat="server" CommandName="Edit" ToolTip="Edit" CommandArgument='<%# Eval("ID") %>' PostBackUrl="~/Default.aspx" Text="Edit"></asp:LinkButton>
+                                                            </td>
+                                                            <td>
+                                                                <asp:LinkButton ID="DeleteLink" runat="server" CommandName="Delete" ToolTip="Delete" CommandArgument='<%# Eval("ID") %>' OnClientClick='<%# "return ConfirmDeleteSubsection(" + Eval("ID") + ")" %>' Text="Delete" ></asp:LinkButton>
                                                             </td>
                                                         </tr>
                                                     </table>                       
