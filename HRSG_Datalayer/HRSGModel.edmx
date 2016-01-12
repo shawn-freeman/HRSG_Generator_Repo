@@ -5,6 +5,121 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="HRSG_DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IndustryID" Type="int" Nullable="false" />
+          <Property Name="EmployeeRange" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientSections">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="SectionID" Type="int" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientSections2Subsections">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ClientSectionID" Type="int" Nullable="false" />
+          <Property Name="SubSectionID" Type="int" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Filename" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeRanges">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Industries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IndustrySections">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="IndustryID" Type="int" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IndustrySections2Subsections">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="IndustrySectionID" Type="int" Nullable="false" />
+          <Property Name="SubSectionID" Type="int" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sections">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubSections">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="ID" />
@@ -16,8 +131,334 @@
           <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="WizardAnswers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Descriptions" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WizardBranch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="WizardQuestionID" Type="int" Nullable="false" />
+          <Property Name="WizardAnswerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WizardQuestions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WizardQuestions2Answers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="WizardQuestionID" Type="int" Nullable="false" />
+          <Property Name="WizardAnswerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WizardQuestions2WizardBranches">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="WizardQuestionID" Type="int" Nullable="false" />
+          <Property Name="WizardBranchID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Clients_EmployeeRanges">
+          <End Role="EmployeeRanges" Type="Self.EmployeeRanges" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRanges">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="EmployeeRange" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Industries">
+          <End Role="Industries" Type="Self.Industries" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IndustryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientSections_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ClientSections" Type="Self.ClientSections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientSections">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientSections_Sections">
+          <End Role="Sections" Type="Self.Sections" Multiplicity="1" />
+          <End Role="ClientSections" Type="Self.ClientSections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sections">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientSections">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientSections2Subsections_ClientSections">
+          <End Role="ClientSections" Type="Self.ClientSections" Multiplicity="1" />
+          <End Role="ClientSections2Subsections" Type="Self.ClientSections2Subsections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientSections">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientSections2Subsections">
+              <PropertyRef Name="ClientSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientSections2Subsections_SubSections">
+          <End Role="SubSections" Type="Self.SubSections" Multiplicity="1" />
+          <End Role="ClientSections2Subsections" Type="Self.ClientSections2Subsections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubSections">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientSections2Subsections">
+              <PropertyRef Name="SubSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documents_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndustrySections_Industries">
+          <End Role="Industries" Type="Self.Industries" Multiplicity="1" />
+          <End Role="IndustrySections" Type="Self.IndustrySections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IndustrySections">
+              <PropertyRef Name="IndustryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndustrySections2Subsections_IndustrySections">
+          <End Role="IndustrySections" Type="Self.IndustrySections" Multiplicity="1" />
+          <End Role="IndustrySections2Subsections" Type="Self.IndustrySections2Subsections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndustrySections">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IndustrySections2Subsections">
+              <PropertyRef Name="IndustrySectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndustrySections2Subsections_SubSections">
+          <End Role="SubSections" Type="Self.SubSections" Multiplicity="1" />
+          <End Role="IndustrySections2Subsections" Type="Self.IndustrySections2Subsections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubSections">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IndustrySections2Subsections">
+              <PropertyRef Name="SubSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WizardBranch_WizardAnswers">
+          <End Role="WizardAnswers" Type="Self.WizardAnswers" Multiplicity="1" />
+          <End Role="WizardBranch" Type="Self.WizardBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WizardAnswers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WizardBranch">
+              <PropertyRef Name="WizardAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WizardBranch_WizardQuestions">
+          <End Role="WizardQuestions" Type="Self.WizardQuestions" Multiplicity="1" />
+          <End Role="WizardBranch" Type="Self.WizardBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WizardQuestions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WizardBranch">
+              <PropertyRef Name="WizardQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WizardQuestions2Answers_WizardAnswers">
+          <End Role="WizardAnswers" Type="Self.WizardAnswers" Multiplicity="1" />
+          <End Role="WizardQuestions2Answers" Type="Self.WizardQuestions2Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WizardAnswers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WizardQuestions2Answers">
+              <PropertyRef Name="WizardAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WizardQuestions2Answers_WizardQuestions">
+          <End Role="WizardQuestions" Type="Self.WizardQuestions" Multiplicity="1" />
+          <End Role="WizardQuestions2Answers" Type="Self.WizardQuestions2Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WizardQuestions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WizardQuestions2Answers">
+              <PropertyRef Name="WizardQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WizardQuestions2WizardBranches_WizardBranch">
+          <End Role="WizardBranch" Type="Self.WizardBranch" Multiplicity="1" />
+          <End Role="WizardQuestions2WizardBranches" Type="Self.WizardQuestions2WizardBranches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WizardBranch">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WizardQuestions2WizardBranches">
+              <PropertyRef Name="WizardBranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WizardQuestions2WizardBranches_WizardQuestions">
+          <End Role="WizardQuestions" Type="Self.WizardQuestions" Multiplicity="1" />
+          <End Role="WizardQuestions2WizardBranches" Type="Self.WizardQuestions2WizardBranches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WizardQuestions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WizardQuestions2WizardBranches">
+              <PropertyRef Name="WizardQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HRSG_DatabaseModelStoreContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientSections" EntityType="Self.ClientSections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientSections2Subsections" EntityType="Self.ClientSections2Subsections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeRanges" EntityType="Self.EmployeeRanges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Industries" EntityType="Self.Industries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IndustrySections" EntityType="Self.IndustrySections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IndustrySections2Subsections" EntityType="Self.IndustrySections2Subsections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubSections" EntityType="Self.SubSections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WizardAnswers" EntityType="Self.WizardAnswers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WizardBranch" EntityType="Self.WizardBranch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WizardQuestions" EntityType="Self.WizardQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WizardQuestions2Answers" EntityType="Self.WizardQuestions2Answers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WizardQuestions2WizardBranches" EntityType="Self.WizardQuestions2WizardBranches" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Clients_EmployeeRanges" Association="Self.FK_Clients_EmployeeRanges">
+            <End Role="EmployeeRanges" EntitySet="EmployeeRanges" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Industries" Association="Self.FK_Clients_Industries">
+            <End Role="Industries" EntitySet="Industries" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientSections_Clients" Association="Self.FK_ClientSections_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientSections" EntitySet="ClientSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientSections_Sections" Association="Self.FK_ClientSections_Sections">
+            <End Role="Sections" EntitySet="Sections" />
+            <End Role="ClientSections" EntitySet="ClientSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientSections2Subsections_ClientSections" Association="Self.FK_ClientSections2Subsections_ClientSections">
+            <End Role="ClientSections" EntitySet="ClientSections" />
+            <End Role="ClientSections2Subsections" EntitySet="ClientSections2Subsections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientSections2Subsections_SubSections" Association="Self.FK_ClientSections2Subsections_SubSections">
+            <End Role="SubSections" EntitySet="SubSections" />
+            <End Role="ClientSections2Subsections" EntitySet="ClientSections2Subsections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Documents_Clients" Association="Self.FK_Documents_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndustrySections_Industries" Association="Self.FK_IndustrySections_Industries">
+            <End Role="Industries" EntitySet="Industries" />
+            <End Role="IndustrySections" EntitySet="IndustrySections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndustrySections2Subsections_IndustrySections" Association="Self.FK_IndustrySections2Subsections_IndustrySections">
+            <End Role="IndustrySections" EntitySet="IndustrySections" />
+            <End Role="IndustrySections2Subsections" EntitySet="IndustrySections2Subsections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndustrySections2Subsections_SubSections" Association="Self.FK_IndustrySections2Subsections_SubSections">
+            <End Role="SubSections" EntitySet="SubSections" />
+            <End Role="IndustrySections2Subsections" EntitySet="IndustrySections2Subsections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WizardBranch_WizardAnswers" Association="Self.FK_WizardBranch_WizardAnswers">
+            <End Role="WizardAnswers" EntitySet="WizardAnswers" />
+            <End Role="WizardBranch" EntitySet="WizardBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WizardBranch_WizardQuestions" Association="Self.FK_WizardBranch_WizardQuestions">
+            <End Role="WizardQuestions" EntitySet="WizardQuestions" />
+            <End Role="WizardBranch" EntitySet="WizardBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WizardQuestions2Answers_WizardAnswers" Association="Self.FK_WizardQuestions2Answers_WizardAnswers">
+            <End Role="WizardAnswers" EntitySet="WizardAnswers" />
+            <End Role="WizardQuestions2Answers" EntitySet="WizardQuestions2Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WizardQuestions2Answers_WizardQuestions" Association="Self.FK_WizardQuestions2Answers_WizardQuestions">
+            <End Role="WizardQuestions" EntitySet="WizardQuestions" />
+            <End Role="WizardQuestions2Answers" EntitySet="WizardQuestions2Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WizardQuestions2WizardBranches_WizardBranch" Association="Self.FK_WizardQuestions2WizardBranches_WizardBranch">
+            <End Role="WizardBranch" EntitySet="WizardBranch" />
+            <End Role="WizardQuestions2WizardBranches" EntitySet="WizardQuestions2WizardBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WizardQuestions2WizardBranches_WizardQuestions" Association="Self.FK_WizardQuestions2WizardBranches_WizardQuestions">
+            <End Role="WizardQuestions" EntitySet="WizardQuestions" />
+            <End Role="WizardQuestions2WizardBranches" EntitySet="WizardQuestions2WizardBranches" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -25,6 +466,85 @@
       <Schema Namespace="HRSG_DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="HRSG_DatabaseEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="Users" EntityType="HRSG_DatabaseModel.User" />
+          <EntitySet Name="Clients" EntityType="HRSG_DatabaseModel.Client" />
+          <EntitySet Name="ClientSections" EntityType="HRSG_DatabaseModel.ClientSection" />
+          <EntitySet Name="ClientSections2Subsections" EntityType="HRSG_DatabaseModel.ClientSections2Subsections" />
+          <EntitySet Name="Documents" EntityType="HRSG_DatabaseModel.Document" />
+          <EntitySet Name="Industries" EntityType="HRSG_DatabaseModel.Industry" />
+          <EntitySet Name="IndustrySections" EntityType="HRSG_DatabaseModel.IndustrySection" />
+          <EntitySet Name="IndustrySections2Subsections" EntityType="HRSG_DatabaseModel.IndustrySections2Subsections" />
+          <EntitySet Name="Sections" EntityType="HRSG_DatabaseModel.Section" />
+          <EntitySet Name="SubSections" EntityType="HRSG_DatabaseModel.SubSection" />
+          <EntitySet Name="WizardAnswers" EntityType="HRSG_DatabaseModel.WizardAnswer" />
+          <EntitySet Name="WizardBranches" EntityType="HRSG_DatabaseModel.WizardBranch" />
+          <EntitySet Name="WizardQuestions" EntityType="HRSG_DatabaseModel.WizardQuestion" />
+          <EntitySet Name="WizardQuestions2Answers" EntityType="HRSG_DatabaseModel.WizardQuestions2Answers" />
+          <EntitySet Name="WizardQuestions2WizardBranches" EntityType="HRSG_DatabaseModel.WizardQuestions2WizardBranches" />
+          <AssociationSet Name="FK_Clients_Industries" Association="HRSG_DatabaseModel.FK_Clients_Industries">
+            <End Role="Industry" EntitySet="Industries" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientSections_Clients" Association="HRSG_DatabaseModel.FK_ClientSections_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="ClientSection" EntitySet="ClientSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Documents_Clients" Association="HRSG_DatabaseModel.FK_Documents_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Document" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientSections_Sections" Association="HRSG_DatabaseModel.FK_ClientSections_Sections">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="ClientSection" EntitySet="ClientSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientSections2Subsections_ClientSections" Association="HRSG_DatabaseModel.FK_ClientSections2Subsections_ClientSections">
+            <End Role="ClientSection" EntitySet="ClientSections" />
+            <End Role="ClientSections2Subsections" EntitySet="ClientSections2Subsections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientSections2Subsections_SubSections" Association="HRSG_DatabaseModel.FK_ClientSections2Subsections_SubSections">
+            <End Role="SubSection" EntitySet="SubSections" />
+            <End Role="ClientSections2Subsections" EntitySet="ClientSections2Subsections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndustrySections_Industries" Association="HRSG_DatabaseModel.FK_IndustrySections_Industries">
+            <End Role="Industry" EntitySet="Industries" />
+            <End Role="IndustrySection" EntitySet="IndustrySections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndustrySections2Subsections_IndustrySections" Association="HRSG_DatabaseModel.FK_IndustrySections2Subsections_IndustrySections">
+            <End Role="IndustrySection" EntitySet="IndustrySections" />
+            <End Role="IndustrySections2Subsections" EntitySet="IndustrySections2Subsections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndustrySections2Subsections_SubSections" Association="HRSG_DatabaseModel.FK_IndustrySections2Subsections_SubSections">
+            <End Role="SubSection" EntitySet="SubSections" />
+            <End Role="IndustrySections2Subsections" EntitySet="IndustrySections2Subsections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WizardBranch_WizardAnswers" Association="HRSG_DatabaseModel.FK_WizardBranch_WizardAnswers">
+            <End Role="WizardAnswer" EntitySet="WizardAnswers" />
+            <End Role="WizardBranch" EntitySet="WizardBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WizardQuestions2Answers_WizardAnswers" Association="HRSG_DatabaseModel.FK_WizardQuestions2Answers_WizardAnswers">
+            <End Role="WizardAnswer" EntitySet="WizardAnswers" />
+            <End Role="WizardQuestions2Answers" EntitySet="WizardQuestions2Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WizardBranch_WizardQuestions" Association="HRSG_DatabaseModel.FK_WizardBranch_WizardQuestions">
+            <End Role="WizardQuestion" EntitySet="WizardQuestions" />
+            <End Role="WizardBranch" EntitySet="WizardBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WizardQuestions2WizardBranches_WizardBranch" Association="HRSG_DatabaseModel.FK_WizardQuestions2WizardBranches_WizardBranch">
+            <End Role="WizardBranch" EntitySet="WizardBranches" />
+            <End Role="WizardQuestions2WizardBranches" EntitySet="WizardQuestions2WizardBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WizardQuestions2Answers_WizardQuestions" Association="HRSG_DatabaseModel.FK_WizardQuestions2Answers_WizardQuestions">
+            <End Role="WizardQuestion" EntitySet="WizardQuestions" />
+            <End Role="WizardQuestions2Answers" EntitySet="WizardQuestions2Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WizardQuestions2WizardBranches_WizardQuestions" Association="HRSG_DatabaseModel.FK_WizardQuestions2WizardBranches_WizardQuestions">
+            <End Role="WizardQuestion" EntitySet="WizardQuestions" />
+            <End Role="WizardQuestions2WizardBranches" EntitySet="WizardQuestions2WizardBranches" />
+          </AssociationSet>
+          <EntitySet Name="EmployeeRanges" EntityType="HRSG_DatabaseModel.EmployeeRanx" />
+          <AssociationSet Name="FK_Clients_EmployeeRanges" Association="HRSG_DatabaseModel.FK_Clients_EmployeeRanges">
+            <End Role="EmployeeRanx" EntitySet="EmployeeRanges" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -37,6 +557,400 @@
           <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IndustryID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeRange" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Industry" Relationship="HRSG_DatabaseModel.FK_Clients_Industries" FromRole="Client" ToRole="Industry" />
+          <NavigationProperty Name="ClientSections" Relationship="HRSG_DatabaseModel.FK_ClientSections_Clients" FromRole="Client" ToRole="ClientSection" />
+          <NavigationProperty Name="Documents" Relationship="HRSG_DatabaseModel.FK_Documents_Clients" FromRole="Client" ToRole="Document" />
+          <NavigationProperty Name="EmployeeRanx" Relationship="HRSG_DatabaseModel.FK_Clients_EmployeeRanges" FromRole="Client" ToRole="EmployeeRanx" />
+        </EntityType>
+        <EntityType Name="ClientSection">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="SectionID" Type="Int32" Nullable="false" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="HRSG_DatabaseModel.FK_ClientSections_Clients" FromRole="ClientSection" ToRole="Client" />
+          <NavigationProperty Name="Section" Relationship="HRSG_DatabaseModel.FK_ClientSections_Sections" FromRole="ClientSection" ToRole="Section" />
+          <NavigationProperty Name="ClientSections2Subsections" Relationship="HRSG_DatabaseModel.FK_ClientSections2Subsections_ClientSections" FromRole="ClientSection" ToRole="ClientSections2Subsections" />
+        </EntityType>
+        <EntityType Name="ClientSections2Subsections">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="ClientSectionID" Type="Int32" Nullable="false" />
+          <Property Name="SubSectionID" Type="Int32" Nullable="false" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientSection" Relationship="HRSG_DatabaseModel.FK_ClientSections2Subsections_ClientSections" FromRole="ClientSections2Subsections" ToRole="ClientSection" />
+          <NavigationProperty Name="SubSection" Relationship="HRSG_DatabaseModel.FK_ClientSections2Subsections_SubSections" FromRole="ClientSections2Subsections" ToRole="SubSection" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Filename" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="HRSG_DatabaseModel.FK_Documents_Clients" FromRole="Document" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Industry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="HRSG_DatabaseModel.FK_Clients_Industries" FromRole="Industry" ToRole="Client" />
+          <NavigationProperty Name="IndustrySections" Relationship="HRSG_DatabaseModel.FK_IndustrySections_Industries" FromRole="Industry" ToRole="IndustrySection" />
+        </EntityType>
+        <EntityType Name="IndustrySection">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="IndustryID" Type="Int32" Nullable="false" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Industry" Relationship="HRSG_DatabaseModel.FK_IndustrySections_Industries" FromRole="IndustrySection" ToRole="Industry" />
+          <NavigationProperty Name="IndustrySections2Subsections" Relationship="HRSG_DatabaseModel.FK_IndustrySections2Subsections_IndustrySections" FromRole="IndustrySection" ToRole="IndustrySections2Subsections" />
+        </EntityType>
+        <EntityType Name="IndustrySections2Subsections">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="IndustrySectionID" Type="Int32" Nullable="false" />
+          <Property Name="SubSectionID" Type="Int32" Nullable="false" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="IndustrySection" Relationship="HRSG_DatabaseModel.FK_IndustrySections2Subsections_IndustrySections" FromRole="IndustrySections2Subsections" ToRole="IndustrySection" />
+          <NavigationProperty Name="SubSection" Relationship="HRSG_DatabaseModel.FK_IndustrySections2Subsections_SubSections" FromRole="IndustrySections2Subsections" ToRole="SubSection" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientSections" Relationship="HRSG_DatabaseModel.FK_ClientSections_Sections" FromRole="Section" ToRole="ClientSection" />
+        </EntityType>
+        <EntityType Name="SubSection">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientSections2Subsections" Relationship="HRSG_DatabaseModel.FK_ClientSections2Subsections_SubSections" FromRole="SubSection" ToRole="ClientSections2Subsections" />
+          <NavigationProperty Name="IndustrySections2Subsections" Relationship="HRSG_DatabaseModel.FK_IndustrySections2Subsections_SubSections" FromRole="SubSection" ToRole="IndustrySections2Subsections" />
+        </EntityType>
+        <EntityType Name="WizardAnswer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Descriptions" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WizardBranches" Relationship="HRSG_DatabaseModel.FK_WizardBranch_WizardAnswers" FromRole="WizardAnswer" ToRole="WizardBranch" />
+          <NavigationProperty Name="WizardQuestions2Answers" Relationship="HRSG_DatabaseModel.FK_WizardQuestions2Answers_WizardAnswers" FromRole="WizardAnswer" ToRole="WizardQuestions2Answers" />
+        </EntityType>
+        <EntityType Name="WizardBranch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="WizardQuestionID" Type="Int32" Nullable="false" />
+          <Property Name="WizardAnswerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WizardAnswer" Relationship="HRSG_DatabaseModel.FK_WizardBranch_WizardAnswers" FromRole="WizardBranch" ToRole="WizardAnswer" />
+          <NavigationProperty Name="WizardQuestion" Relationship="HRSG_DatabaseModel.FK_WizardBranch_WizardQuestions" FromRole="WizardBranch" ToRole="WizardQuestion" />
+          <NavigationProperty Name="WizardQuestions2WizardBranches" Relationship="HRSG_DatabaseModel.FK_WizardQuestions2WizardBranches_WizardBranch" FromRole="WizardBranch" ToRole="WizardQuestions2WizardBranches" />
+        </EntityType>
+        <EntityType Name="WizardQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WizardBranches" Relationship="HRSG_DatabaseModel.FK_WizardBranch_WizardQuestions" FromRole="WizardQuestion" ToRole="WizardBranch" />
+          <NavigationProperty Name="WizardQuestions2Answers" Relationship="HRSG_DatabaseModel.FK_WizardQuestions2Answers_WizardQuestions" FromRole="WizardQuestion" ToRole="WizardQuestions2Answers" />
+          <NavigationProperty Name="WizardQuestions2WizardBranches" Relationship="HRSG_DatabaseModel.FK_WizardQuestions2WizardBranches_WizardQuestions" FromRole="WizardQuestion" ToRole="WizardQuestions2WizardBranches" />
+        </EntityType>
+        <EntityType Name="WizardQuestions2Answers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="WizardQuestionID" Type="Int32" Nullable="false" />
+          <Property Name="WizardAnswerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WizardAnswer" Relationship="HRSG_DatabaseModel.FK_WizardQuestions2Answers_WizardAnswers" FromRole="WizardQuestions2Answers" ToRole="WizardAnswer" />
+          <NavigationProperty Name="WizardQuestion" Relationship="HRSG_DatabaseModel.FK_WizardQuestions2Answers_WizardQuestions" FromRole="WizardQuestions2Answers" ToRole="WizardQuestion" />
+        </EntityType>
+        <EntityType Name="WizardQuestions2WizardBranches">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="WizardQuestionID" Type="Int32" Nullable="false" />
+          <Property Name="WizardBranchID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WizardBranch" Relationship="HRSG_DatabaseModel.FK_WizardQuestions2WizardBranches_WizardBranch" FromRole="WizardQuestions2WizardBranches" ToRole="WizardBranch" />
+          <NavigationProperty Name="WizardQuestion" Relationship="HRSG_DatabaseModel.FK_WizardQuestions2WizardBranches_WizardQuestions" FromRole="WizardQuestions2WizardBranches" ToRole="WizardQuestion" />
+        </EntityType>
+        <Association Name="FK_Clients_Industries">
+          <End Type="HRSG_DatabaseModel.Industry" Role="Industry" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="IndustryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientSections_Clients">
+          <End Type="HRSG_DatabaseModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.ClientSection" Role="ClientSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientSection">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documents_Clients">
+          <End Type="HRSG_DatabaseModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientSections_Sections">
+          <End Type="HRSG_DatabaseModel.Section" Role="Section" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.ClientSection" Role="ClientSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientSection">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientSections2Subsections_ClientSections">
+          <End Type="HRSG_DatabaseModel.ClientSection" Role="ClientSection" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.ClientSections2Subsections" Role="ClientSections2Subsections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientSection">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientSections2Subsections">
+              <PropertyRef Name="ClientSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientSections2Subsections_SubSections">
+          <End Type="HRSG_DatabaseModel.SubSection" Role="SubSection" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.ClientSections2Subsections" Role="ClientSections2Subsections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubSection">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientSections2Subsections">
+              <PropertyRef Name="SubSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndustrySections_Industries">
+          <End Type="HRSG_DatabaseModel.Industry" Role="Industry" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.IndustrySection" Role="IndustrySection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IndustrySection">
+              <PropertyRef Name="IndustryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndustrySections2Subsections_IndustrySections">
+          <End Type="HRSG_DatabaseModel.IndustrySection" Role="IndustrySection" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.IndustrySections2Subsections" Role="IndustrySections2Subsections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndustrySection">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IndustrySections2Subsections">
+              <PropertyRef Name="IndustrySectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndustrySections2Subsections_SubSections">
+          <End Type="HRSG_DatabaseModel.SubSection" Role="SubSection" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.IndustrySections2Subsections" Role="IndustrySections2Subsections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubSection">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IndustrySections2Subsections">
+              <PropertyRef Name="SubSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WizardBranch_WizardAnswers">
+          <End Type="HRSG_DatabaseModel.WizardAnswer" Role="WizardAnswer" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.WizardBranch" Role="WizardBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WizardAnswer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WizardBranch">
+              <PropertyRef Name="WizardAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WizardQuestions2Answers_WizardAnswers">
+          <End Type="HRSG_DatabaseModel.WizardAnswer" Role="WizardAnswer" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.WizardQuestions2Answers" Role="WizardQuestions2Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WizardAnswer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WizardQuestions2Answers">
+              <PropertyRef Name="WizardAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WizardBranch_WizardQuestions">
+          <End Type="HRSG_DatabaseModel.WizardQuestion" Role="WizardQuestion" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.WizardBranch" Role="WizardBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WizardQuestion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WizardBranch">
+              <PropertyRef Name="WizardQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WizardQuestions2WizardBranches_WizardBranch">
+          <End Type="HRSG_DatabaseModel.WizardBranch" Role="WizardBranch" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.WizardQuestions2WizardBranches" Role="WizardQuestions2WizardBranches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WizardBranch">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WizardQuestions2WizardBranches">
+              <PropertyRef Name="WizardBranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WizardQuestions2Answers_WizardQuestions">
+          <End Type="HRSG_DatabaseModel.WizardQuestion" Role="WizardQuestion" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.WizardQuestions2Answers" Role="WizardQuestions2Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WizardQuestion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WizardQuestions2Answers">
+              <PropertyRef Name="WizardQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WizardQuestions2WizardBranches_WizardQuestions">
+          <End Type="HRSG_DatabaseModel.WizardQuestion" Role="WizardQuestion" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.WizardQuestions2WizardBranches" Role="WizardQuestions2WizardBranches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WizardQuestion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WizardQuestions2WizardBranches">
+              <PropertyRef Name="WizardQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EmployeeRanx">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="HRSG_DatabaseModel.FK_Clients_EmployeeRanges" FromRole="EmployeeRanx" ToRole="Client" />
+        </EntityType>
+        <Association Name="FK_Clients_EmployeeRanges">
+          <End Type="HRSG_DatabaseModel.EmployeeRanx" Role="EmployeeRanx" Multiplicity="1" />
+          <End Type="HRSG_DatabaseModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRanx">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="EmployeeRange" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -48,6 +962,191 @@
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="EmployeeRange" ColumnName="EmployeeRange" />
+                <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientSections">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.ClientSection">
+              <MappingFragment StoreEntitySet="ClientSections">
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientSections2Subsections">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.ClientSections2Subsections">
+              <MappingFragment StoreEntitySet="ClientSections2Subsections">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="SubSectionID" ColumnName="SubSectionID" />
+                <ScalarProperty Name="ClientSectionID" ColumnName="ClientSectionID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.Document">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Industries">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.Industry">
+              <MappingFragment StoreEntitySet="Industries">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndustrySections">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.IndustrySection">
+              <MappingFragment StoreEntitySet="IndustrySections">
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndustrySections2Subsections">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.IndustrySections2Subsections">
+              <MappingFragment StoreEntitySet="IndustrySections2Subsections">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="SubSectionID" ColumnName="SubSectionID" />
+                <ScalarProperty Name="IndustrySectionID" ColumnName="IndustrySectionID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.Section">
+              <MappingFragment StoreEntitySet="Sections">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubSections">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.SubSection">
+              <MappingFragment StoreEntitySet="SubSections">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WizardAnswers">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.WizardAnswer">
+              <MappingFragment StoreEntitySet="WizardAnswers">
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WizardBranches">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.WizardBranch">
+              <MappingFragment StoreEntitySet="WizardBranch">
+                <ScalarProperty Name="WizardAnswerID" ColumnName="WizardAnswerID" />
+                <ScalarProperty Name="WizardQuestionID" ColumnName="WizardQuestionID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WizardQuestions">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.WizardQuestion">
+              <MappingFragment StoreEntitySet="WizardQuestions">
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WizardQuestions2Answers">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.WizardQuestions2Answers">
+              <MappingFragment StoreEntitySet="WizardQuestions2Answers">
+                <ScalarProperty Name="WizardAnswerID" ColumnName="WizardAnswerID" />
+                <ScalarProperty Name="WizardQuestionID" ColumnName="WizardQuestionID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WizardQuestions2WizardBranches">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.WizardQuestions2WizardBranches">
+              <MappingFragment StoreEntitySet="WizardQuestions2WizardBranches">
+                <ScalarProperty Name="WizardBranchID" ColumnName="WizardBranchID" />
+                <ScalarProperty Name="WizardQuestionID" ColumnName="WizardQuestionID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeRanges">
+            <EntityTypeMapping TypeName="HRSG_DatabaseModel.EmployeeRanx">
+              <MappingFragment StoreEntitySet="EmployeeRanges">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />

@@ -51,6 +51,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientSection.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientSections2Subsections.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Document.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeRanx.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="HRSGModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -66,8 +81,38 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HRSGModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Industry.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndustrySection.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndustrySections2Subsections.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Section.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubSection.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WizardAnswer.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WizardBranch.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WizardQuestion.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WizardQuestions2Answers.cs">
+      <DependentUpon>HRSGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WizardQuestions2WizardBranches.cs">
       <DependentUpon>HRSGModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

@@ -6,6 +6,37 @@
     <edmx:Diagrams>
       <Diagram DiagramId="9b887b2bfa674aad877854b418410423" Name="Diagram1" >
         <EntityTypeShape EntityType="HRSG_DatabaseModel.User" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.Client" Width="1.5" PointX="5.625" PointY="4.75" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.ClientSection" Width="1.5" PointX="7.875" PointY="4.875" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.ClientSections2Subsections" Width="1.5" PointX="10.125" PointY="4.875" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.Document" Width="1.5" PointX="7.875" PointY="12.75" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.Industry" Width="1.5" PointX="3.375" PointY="5.125" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.IndustrySection" Width="1.5" PointX="5.625" PointY="8.875" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.IndustrySections2Subsections" Width="1.5" PointX="7.875" PointY="8.75" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.Section" Width="1.5" PointX="5.625" PointY="1.125" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.SubSection" Width="1.5" PointX="7.875" PointY="1" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.WizardAnswer" Width="1.5" PointX="10.375" PointY="14.875" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.WizardBranch" Width="1.5" PointX="12.625" PointY="10.75" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.WizardQuestion" Width="1.5" PointX="10.375" PointY="10.75" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.WizardQuestions2Answers" Width="1.5" PointX="15.625" PointY="10.875" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.WizardQuestions2WizardBranches" Width="1.5" PointX="17.875" PointY="10.875" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_Clients_Industries" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_ClientSections_Clients" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_Documents_Clients" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_ClientSections_Sections" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_ClientSections2Subsections_ClientSections" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_ClientSections2Subsections_SubSections" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_IndustrySections_Industries" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_IndustrySections2Subsections_IndustrySections" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_IndustrySections2Subsections_SubSections" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_WizardBranch_WizardAnswers" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_WizardQuestions2Answers_WizardAnswers" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_WizardBranch_WizardQuestions" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_WizardQuestions2WizardBranches_WizardBranch" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_WizardQuestions2Answers_WizardQuestions" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_WizardQuestions2WizardBranches_WizardQuestions" />
+        <EntityTypeShape EntityType="HRSG_DatabaseModel.EmployeeRanx" Width="1.5" PointX="0.75" PointY="3.875" />
+        <AssociationConnector Association="HRSG_DatabaseModel.FK_Clients_EmployeeRanges" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

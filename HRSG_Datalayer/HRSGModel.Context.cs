@@ -26,5 +26,20 @@ namespace HRSG_Datalayer
         }
     
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<ClientSection> ClientSections { get; set; }
+        public virtual DbSet<ClientSections2Subsections> ClientSections2Subsections { get; set; }
+        public virtual DbSet<Document> Documents { get; set; }
+        public virtual DbSet<Industry> Industries { get; set; }
+        public virtual DbSet<IndustrySection> IndustrySections { get; set; }
+        public virtual DbSet<IndustrySections2Subsections> IndustrySections2Subsections { get; set; }
+        public virtual DbSet<Section> Sections { get; set; }
+        public virtual DbSet<SubSection> SubSections { get; set; }
+        public virtual DbSet<WizardAnswer> WizardAnswers { get; set; }
+        public virtual DbSet<WizardBranch> WizardBranches { get; set; }
+        public virtual DbSet<WizardQuestion> WizardQuestions { get; set; }
+        public virtual DbSet<WizardQuestions2Answers> WizardQuestions2Answers { get; set; }
+        public virtual DbSet<WizardQuestions2WizardBranches> WizardQuestions2WizardBranches { get; set; }
+        public virtual DbSet<EmployeeRanx> EmployeeRanges { get; set; }
     }
 }
