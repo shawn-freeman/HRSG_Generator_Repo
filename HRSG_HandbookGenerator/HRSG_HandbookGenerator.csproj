@@ -258,6 +258,7 @@
     <Content Include="Popup.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Login.aspx" />
+    <Content Include="Popups\EditSection.aspx" />
     <Content Include="Popups\EditSubsection.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -487,6 +488,13 @@
     </Compile>
     <Compile Include="Popup.Master.designer.cs">
       <DependentUpon>Popup.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Popups\EditSection.aspx.cs">
+      <DependentUpon>EditSection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popups\EditSection.aspx.designer.cs">
+      <DependentUpon>EditSection.aspx</DependentUpon>
     </Compile>
     <Compile Include="Popups\EditSubsection.aspx.cs">
       <DependentUpon>EditSubsection.aspx</DependentUpon>

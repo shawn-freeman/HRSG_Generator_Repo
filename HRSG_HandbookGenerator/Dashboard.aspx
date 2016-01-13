@@ -42,7 +42,12 @@
                 var oWnd = radopen("Popups/AddSection.aspx?", "radwinAddSection");
             }
 
-            function OnAddSectionClose(oWnd, args) {
+            function OpenEditSection(arg) {
+                var oWnd = radopen("Popups/EditSection.aspx?ID=" + arg, "radwinEditSection");
+                return false;
+            }
+
+            function OnAddEditSectionClose(oWnd, args) {
                 var arg = args.get_argument();
 
                 if (arg) {
@@ -238,7 +243,7 @@
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                <asp:LinkButton ID="Edit" runat="server" CommandName="Edit" ToolTip="Edit" CommandArgument='<%# Eval("ID") %>' PostBackUrl="~/Default.aspx" Text="Edit"></asp:LinkButton>
+                                                                <asp:LinkButton ID="Edit" runat="server" ToolTip="Edit" OnClientClick='<%# "return OpenEditSection(" + Eval("ID") + ")" %>' Text="Edit"></asp:LinkButton>
                                                             </td>
                                                             <td>
                                                                 <asp:LinkButton ID="DeleteLink" runat="server" CommandName="Delete" ToolTip="Delete" CommandArgument='<%# Eval("ID") %>' OnClientClick='<%# "return ConfirmDeleteSection(" + Eval("ID") + ")" %>' Text="Delete" ></asp:LinkButton>
@@ -292,7 +297,7 @@
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                <asp:LinkButton ID="Edit" runat="server" ToolTip="Edit" OnClientClick='<%# "return OpenEditSubSection(" + Eval("ID") + ")" %> ' Text="Edit"></asp:LinkButton>
+                                                                <asp:LinkButton ID="Edit" runat="server" ToolTip="Edit" OnClientClick='<%# "return OpenEditSubSection(" + Eval("ID") + ")" %>' Text="Edit"></asp:LinkButton>
                                                             </td>
                                                             <td>
                                                                 <asp:LinkButton ID="DeleteLink" runat="server" CommandName="Delete" ToolTip="Delete" CommandArgument='<%# Eval("ID") %>' OnClientClick='<%# "return ConfirmDeleteSubsection(" + Eval("ID") + ")" %>' Text="Delete" ></asp:LinkButton>
@@ -319,7 +324,9 @@
                         OnClientClose="OnAddEditSubsectionClose" NavigateUrl="~/Popups/EditSubsection.aspx" />
                     
                     <telerik:RadWindow runat="server" ID="radwinAddSection" Width="960" Height="640" Behaviors="Close"
-                        OnClientClose="OnAddSectionClose" NavigateUrl="~/Popups/AddSection.aspx" />
+                        OnClientClose="OnAddEditSectionClose" NavigateUrl="~/Popups/AddSection.aspx" />
+                    <telerik:RadWindow runat="server" ID="radwinEditSection" Width="960" Height="640" Behaviors="Close"
+                        OnClientClose="OnAddEditSectionClose" NavigateUrl="~/Popups/EditSection.aspx" />
                     
                     <telerik:RadWindow runat="server" ID="radwinAddIndustry" Width="480" Height="240" Behaviors="Close"
                         OnClientClose="OnAddIndustryClose" NavigateUrl="~/Popups/AddIndustry.aspx" />
