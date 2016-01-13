@@ -15,6 +15,21 @@
                 return confirm('Are you sure you want to delete Section #' + id + " ?");
             }
 
+            //Section
+            function OpenAddSection() {
+                var oWnd = radopen("Popups/AddSection.aspx?", "radwinAddSection");
+            }
+
+            function OnAddSectionClose(oWnd, args) {
+                var arg = args.get_argument();
+
+                if (arg) {
+                    var masterTable = window.$find('<%= rgSections.ClientID %>').get_masterTableView();
+                    masterTable.rebind();
+                }
+            }
+
+            //Subsection
             function ConfirmDeleteSubsection(id) {
                 return confirm('Are you sure you want to delete Subsection #' + id + " ?");
             }
@@ -26,7 +41,6 @@
             function OnAddSubsectionClose(oWnd, args) {
                 var arg = args.get_argument();
 
-                //if a arg was found, then a a save occured
                 if (arg) {
                     var masterTable = window.$find('<%= rgSubsections.ClientID %>').get_masterTableView();
                     masterTable.rebind();
@@ -169,7 +183,7 @@
                         
                                 <span style="padding-right: 10px;float:right; vertical-align:top">
                                     <span style="padding-right: 10px">&nbsp;</span>
-                                    <asp:button CssClass="button-wide button-orange" id="btnAddSection" Text="Add Section" runat="server" />
+                                    <asp:button CssClass="button-wide button-orange" id="btnAddSection" Text="Add Section" runat="server" OnClientClick="OpenAddSection();return false;" />
                                 </span><br />
 
                                 <div style="padding-top: 20px;padding-right: 10px;padding-bottom: 20px;vertical-align:top">
@@ -274,6 +288,9 @@
                 <Windows>
                     <telerik:RadWindow runat="server" ID="radwinAddSubsection" Width="960" Height="640" Behaviors="Close"
                         OnClientClose="OnAddSubsectionClose" NavigateUrl="~/Popups/AddSubsection.aspx" />
+                    
+                    <telerik:RadWindow runat="server" ID="radwinAddSection" Width="960" Height="640" Behaviors="Close"
+                        OnClientClose="OnAddSectionClose" NavigateUrl="~/Popups/AddSection.aspx" />
                 </Windows>
             </telerik:RadWindowManager>
 
