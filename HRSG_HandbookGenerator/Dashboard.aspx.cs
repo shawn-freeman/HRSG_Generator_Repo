@@ -142,10 +142,15 @@ namespace HRSG_HandbookGenerator {
         }
 
         protected void rgSubsections_OnItemCommand(object sender, GridCommandEventArgs e) {
+            
+
             using (var hrsgEntities = new HRSG_DatabaseEntities()) {
                 switch (e.CommandName) {
                     case "Edit":
+                        var item = e.Item as GridDataItem;
+                        var itemID = item["ID"].Text;
 
+                        ClientScript.RegisterStartupScript(Page.GetType(), "mykey", $"OpenEditSubSection({itemID});", true);
                         break;
 
                     case "Delete":

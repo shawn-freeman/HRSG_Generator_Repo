@@ -60,7 +60,12 @@
                 var oWnd = radopen("Popups/AddSubSection.aspx?", "radwinAddSubsection");
             }
 
-            function OnAddSubsectionClose(oWnd, args) {
+            function OpenEditSubSection(arg) {
+                var oWnd = radopen("Popups/EditSubsection.aspx?ID=" + arg, "radwinEditSubsection");
+                return false;
+            }
+
+            function OnAddEditSubsectionClose(oWnd, args) {
                 var arg = args.get_argument();
 
                 if (arg) {
@@ -287,7 +292,7 @@
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                <asp:LinkButton ID="Edit" runat="server" CommandName="Edit" ToolTip="Edit" CommandArgument='<%# Eval("ID") %>' PostBackUrl="~/Default.aspx" Text="Edit"></asp:LinkButton>
+                                                                <asp:LinkButton ID="Edit" runat="server" ToolTip="Edit" OnClientClick='<%# "return OpenEditSubSection(" + Eval("ID") + ")" %> ' Text="Edit"></asp:LinkButton>
                                                             </td>
                                                             <td>
                                                                 <asp:LinkButton ID="DeleteLink" runat="server" CommandName="Delete" ToolTip="Delete" CommandArgument='<%# Eval("ID") %>' OnClientClick='<%# "return ConfirmDeleteSubsection(" + Eval("ID") + ")" %>' Text="Delete" ></asp:LinkButton>
@@ -309,7 +314,9 @@
             <telerik:RadWindowManager runat="server" ShowContentDuringLoad="False" VisibleStatusbar="False" Modal="True" ReloadOnShow="True" >
                 <Windows>
                     <telerik:RadWindow runat="server" ID="radwinAddSubsection" Width="960" Height="640" Behaviors="Close"
-                        OnClientClose="OnAddSubsectionClose" NavigateUrl="~/Popups/AddSubsection.aspx" />
+                        OnClientClose="OnAddEditSubsectionClose" NavigateUrl="~/Popups/AddSubsection.aspx" />
+                    <telerik:RadWindow runat="server" ID="radwinEditSubsection" Width="960" Height="640" Behaviors="Close"
+                        OnClientClose="OnAddEditSubsectionClose" NavigateUrl="~/Popups/EditSubsection.aspx" />
                     
                     <telerik:RadWindow runat="server" ID="radwinAddSection" Width="960" Height="640" Behaviors="Close"
                         OnClientClose="OnAddSectionClose" NavigateUrl="~/Popups/AddSection.aspx" />
