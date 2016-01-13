@@ -7,15 +7,37 @@
                 return confirm('Are you sure you want to delete Client #' + id + " ?");
             }
 
-            function ConfirmDeleteIndustry(id){
-                return confirm('Are you sure you want to delete Industry #' + id + " ?");
+            //Industry
+            function ConfirmDeleteElement(id){
+                return confirm('Are you sure you want to delete Element #' + id + " ?");
             }
 
+            function OpenPopup(arg) {
+                var popups = ["AddClient", "AddIndustry", "AddSection", "Subsection"];
+                var windows = ["", "radwinAddIndustry", "radwinAddSection", "radwinAddSubsection"];
+
+                if (!arg) {
+                    alert("Popup ID not specified!");
+                    return;
+                }
+
+                var oWnd = radopen("Popups/" + popups[arg] +".aspx?", windows[arg]);
+            }
+
+            function OnAddIndustryClose(oWnd, args) {
+                var arg = args.get_argument();
+
+                if (arg) {
+                    var masterTable = window.$find('<%= rgIndustries.ClientID %>').get_masterTableView();
+                    masterTable.rebind();
+                }
+            }
+
+            //Section
             function ConfirmDeleteSection(id) {
                 return confirm('Are you sure you want to delete Section #' + id + " ?");
             }
 
-            //Section
             function OpenAddSection() {
                 var oWnd = radopen("Popups/AddSection.aspx?", "radwinAddSection");
             }
@@ -131,7 +153,7 @@
                         
                                 <span style="padding-right: 10px;float:right; vertical-align:top">
                                     <span style="padding-right: 10px">&nbsp;</span>
-                                    <asp:button CssClass="button-wide button-orange" id="btnAddIndustry" Text="Add Industry" runat="server" />
+                                    <asp:button CssClass="button-wide button-orange" id="btnAddIndustry" Text="Add Industry" runat="server" OnClientClick="OpenPopup(1);return false;" />
                                 </span><br />
 
                                 <div style="padding-top: 20px;padding-right: 10px;padding-bottom: 20px;vertical-align:top">
@@ -160,7 +182,7 @@
                                                                 <asp:LinkButton ID="Edit" runat="server" CommandName="Edit" ToolTip="Edit" CommandArgument='<%# Eval("ID") %>' PostBackUrl="~/Default.aspx" Text="Edit"></asp:LinkButton>
                                                             </td>
                                                             <td>
-                                                                <asp:LinkButton ID="DeleteLink" runat="server" CommandName="Delete" ToolTip="Delete" CommandArgument='<%# Eval("ID") %>' OnClientClick='<%# "return ConfirmDeleteIndustry(" + Eval("ID") + ")" %>' Text="Delete" ></asp:LinkButton>
+                                                                <asp:LinkButton ID="DeleteLink" runat="server" CommandName="Delete" ToolTip="Delete" CommandArgument='<%# Eval("ID") %>' OnClientClick='<%# "return ConfirmDeleteElement(" + Eval("ID") + ")" %>' Text="Delete" ></asp:LinkButton>
                                                             </td>
                                                         </tr>
                                                     </table>                       
@@ -198,15 +220,15 @@
                                     OnNeedDataSource="rgSections_OnNeedDataSource" OnItemCommand="rgSections_OnItemCommand">
                                     <MasterTableView NoMasterRecordsText="No records exist.">
                                         <Columns>
-                                            <telerik:GridBoundColumn HeaderText="ID" UniqueName="ID" DataField="ID" />
+                                            <telerik:GridBoundColumn HeaderText="ID" UniqueName="ID" DataField="ID" HeaderStyle-Width="5%" ItemStyle-Width="5%" />
 
-                                            <telerik:GridBoundColumn HeaderText="Modified" UniqueName="Modified" DataField="Modified" DataFormatString="{0:MM/dd/yy}"/>
+                                            <telerik:GridBoundColumn HeaderText="Modified" UniqueName="Modified" DataField="Modified" DataFormatString="{0:MM/dd/yy}" HeaderStyle-Width="10%" ItemStyle-Width="10%" />
                                             
-                                            <telerik:GridBoundColumn HeaderText="Description" UniqueName="Description" DataField="Description" />
+                                            <telerik:GridBoundColumn HeaderText="Description" UniqueName="Description" DataField="Description" HeaderStyle-Width="15%" ItemStyle-Width="15%" />
 
-                                            <telerik:GridBoundColumn HeaderText="Value" UniqueName="Value" DataField="Value" />
+                                            <telerik:GridBoundColumn HeaderText="Value" UniqueName="Value" DataField="Value" HeaderStyle-Width="60%" ItemStyle-Width="60%" />
                                         
-                                            <telerik:GridTemplateColumn HeaderText="Actions" HeaderStyle-Width="10%">
+                                            <telerik:GridTemplateColumn HeaderText="Actions" HeaderStyle-Width="10%" ItemStyle-Width="10%">
                                                 <ItemTemplate>
                                                     <table>
                                                         <tr>
@@ -258,7 +280,7 @@
                                             
                                             <telerik:GridBoundColumn HeaderText="Description" UniqueName="Description" DataField="Description" HeaderStyle-Width="15%" ItemStyle-Width="15%" />
 
-                                            <telerik:GridBoundColumn HeaderText="Value" UniqueName="Value" DataField="Value" HeaderStyle-Width="60%" ItemStyle-Width="5%" />
+                                            <telerik:GridBoundColumn HeaderText="Value" UniqueName="Value" DataField="Value" HeaderStyle-Width="60%" ItemStyle-Width="60%" />
                                         
                                             <telerik:GridTemplateColumn HeaderText="Actions" HeaderStyle-Width="10%" ItemStyle-Width="10%" >
                                                 <ItemTemplate>
@@ -291,6 +313,9 @@
                     
                     <telerik:RadWindow runat="server" ID="radwinAddSection" Width="960" Height="640" Behaviors="Close"
                         OnClientClose="OnAddSectionClose" NavigateUrl="~/Popups/AddSection.aspx" />
+                    
+                    <telerik:RadWindow runat="server" ID="radwinAddIndustry" Width="480" Height="240" Behaviors="Close"
+                        OnClientClose="OnAddIndustryClose" NavigateUrl="~/Popups/AddIndustry.aspx" />
                 </Windows>
             </telerik:RadWindowManager>
 

@@ -203,6 +203,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="Popups\AddIndustry.aspx" />
     <Content Include="Popups\AddSection.aspx" />
     <Content Include="Popups\AddSubSection.aspx" />
     <Content Include="App_Data\RadCaptcha\0.wav" />
@@ -408,6 +409,13 @@
     </Compile>
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Popups\AddIndustry.aspx.cs">
+      <DependentUpon>AddIndustry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popups\AddIndustry.aspx.designer.cs">
+      <DependentUpon>AddIndustry.aspx</DependentUpon>
     </Compile>
     <Compile Include="Popups\AddSection.aspx.cs">
       <DependentUpon>AddSection.aspx</DependentUpon>

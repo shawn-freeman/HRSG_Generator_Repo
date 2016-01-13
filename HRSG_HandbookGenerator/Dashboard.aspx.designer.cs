@@ -164,5 +164,14 @@ namespace HRSG_HandbookGenerator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadWindow radwinAddSection;
+        
+        /// <summary>
+        /// radwinAddIndustry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow radwinAddIndustry;
     }
 }
